@@ -12,13 +12,15 @@ and open the template in the editor.
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css"/>	
 	</head>
     <body>
-        <a th:href="@{add}" href='formulaireGalerie.html'>Ajouter un tableau</a>
+        <a th:href="@{add}" href='formulaireTableau.html'>Ajouter un tableau</a>
         <table>
             <thead>
                 <tr>
                     <th>Titre</th>
                     <th>Support</th> 
                     <th>Dimension</th>
+                    <th>Suppression</th>
+                    <th>Auteur</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +28,9 @@ and open the template in the editor.
                     <td th:text="${t.titre}"/>
                     <td th:text="${t.support}"/>
                     <td th:text="${t.dimension}"/>
+                    <td><a th:href="@{delete(id=${t.id})}">Supprimer le tableau n° [[${t.id}]]</a></td>
+                    <td th:if="${t.auteur==Null}">auteur inconnu</td>
+                    <td th:unless="${t.auteur==Null}">[[${t.auteur.nom}]]</td>
                 </tr>
             </tbody>
         </table>

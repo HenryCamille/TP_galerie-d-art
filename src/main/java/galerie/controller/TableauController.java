@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import galerie.dao.TableauRepository;
+ import galerie.dao.ArtisteRepository;
 import galerie.entity.Tableau;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +24,9 @@ public class TableauController {
 
     @Autowired
     private TableauRepository dao;
+    
+    @Autowired
+    private ArtisteRepository dao2;
 
     /**
      * Affiche toutes les catégories dans la base
@@ -43,7 +47,8 @@ public class TableauController {
      * @return le nom de la vue à afficher ('formulaireTableau.html')
      */
     @GetMapping(path = "add")
-    public String montreLeFormulairePourAjout(@ModelAttribute("tableau") Tableau tableau) {
+    public String montreLeFormulairePourAjout(@ModelAttribute("tableau") Tableau tableau, Model model) {
+        model.addAttribute("artiste", dao2.findAll());
         return "formulaireTableau";
     }
 
